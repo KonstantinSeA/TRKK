@@ -27,8 +27,7 @@ class CircleFactoryForm(QWidget, Ui_Circle_Factory):
         for c in self.coords:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(
-                QColor(c[4], c[5], c[6]))
+            qp.setBrush(QColor(c[4], c[5], c[6]))
             qp.drawEllipse(c[0], c[1], c[2], c[3])
             qp.end()
 
