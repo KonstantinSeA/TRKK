@@ -6,24 +6,29 @@ from PyQt5 import uic
 
 import random
 
+from UI import Ui_Circle_Factory
 
-class CircleFactoryForm(QWidget):
+
+class CircleFactoryForm(QWidget, Ui_Circle_Factory):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.ImButton.clicked.connect(self.run_imbutton)
         self.coords = []
 
     def run_imbutton(self):
         size = random.randint(10, 100)
-        self.coords.append((random.randint(0, 500), random.randint(0, 500), size, size))
+        self.coords.append((random.randint(0, 500), random.randint(0, 500), size, size,
+                            random.randint(0, 255), random.randint(0, 255),
+                            random.randint(0, 255)))
         self.update()
 
     def paintEvent(self, event):
         for c in self.coords:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(QColor('yellow'))
+            qp.setBrush(
+                QColor(c[4], c[5], c[6]))
             qp.drawEllipse(c[0], c[1], c[2], c[3])
             qp.end()
 
